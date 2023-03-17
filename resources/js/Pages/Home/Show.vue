@@ -24,7 +24,13 @@
       </div>
     </div>
   </Box>
-  <div class="grid grid-cols-4 gap-4 mt-5" v-if="program.report.length != 0">
+  <div class="my-5">
+    <Link :href="route('program.show.all')" class="font-medium btn-primary"
+      >Submit a report</Link
+    >
+  </div>
+
+  <div class="grid grid-cols-4 gap-4" v-if="program.report.length != 0">
     <div v-for="report in program.report" :key="report.id">
       <Box class="mb-5">
         <template #header> Report Information </template>
@@ -40,6 +46,10 @@
           <p>Severity:</p>
           <p class="text-red-300">{{ report.severity }}</p>
         </div>
+        <div class="flex justify-between">
+          <p>Created by:</p>
+          <p class="text-orange-300">{{ report.user.name }}</p>
+        </div>
       </Box>
     </div>
   </div>
@@ -53,6 +63,7 @@
 </template>
 
 <script setup>
+import { Link } from "@inertiajs/vue3";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import Box from "@/Components/Box.vue";
 defineOptions({ layout: MainLayout });
