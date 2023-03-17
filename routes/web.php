@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth_guard']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('program.index');
     Route::get('program/{id}', [HomeController::class, 'show'])->name('program.show');
     Route::put('program/{id}', [HomeController::class, 'update'])->name('program.update');
+    Route::delete('program/{id}', [HomeController::class, 'destroy'])->name('program.delete');
     Route::get('program/user/all', [HomeController::class, 'showAllByUser'])->name('program.show.all');
     Route::get('program/{program_id}/user', [HomeController::class, 'showByUser'])->name('program.show.by-user');
     Route::get('program/{program_id}/edit/user', [HomeController::class, 'showByUserEdit']);

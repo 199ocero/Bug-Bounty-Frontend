@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-white text-center font-medium text-2xl my-5">
+  <h1 class="my-5 text-2xl font-medium text-center text-white">
     Edit and Update
   </h1>
   <div class="w-1/2 mx-auto">
@@ -53,6 +53,7 @@
     </form>
   </div>
 </template>
+
 <script setup>
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { useForm } from "@inertiajs/vue3";
@@ -60,12 +61,15 @@ import { useForm } from "@inertiajs/vue3";
 const props = defineProps({
   program: Object,
 });
+
 const form = useForm({
   name: props.program.name,
-  pentesting_start_date: props.program.pentesting_start_date,
-  pentesting_end_date: props.program.pentesting_end_date,
+  pentesting_start_date: props.program.pentesting_start_date.slice(0, -3),
+  pentesting_end_date: props.program.pentesting_end_date.slice(0, -3),
 });
+
 const update = () =>
   form.put(route("program.update", { id: props.program.id }));
+
 defineOptions({ layout: MainLayout });
 </script>

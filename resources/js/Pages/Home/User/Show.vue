@@ -8,7 +8,13 @@
           class="text-sm btn-primary-sm"
           >Edit</Link
         >
-        <Link href="#" class="text-sm btn-danger-sm">Delete</Link>
+        <Link
+          :href="route('program.delete', { id: program.id })"
+          method="DELETE"
+          as="button"
+          class="text-sm btn-danger-sm"
+          >Delete</Link
+        >
       </div>
     </template>
     <div>

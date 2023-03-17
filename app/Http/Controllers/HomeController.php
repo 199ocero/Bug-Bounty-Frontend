@@ -63,22 +63,49 @@ class HomeController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'pentesting_start_date' => 'required',
+            'pentesting_end_date' => 'required',
+        ]);
+
+        $startDate = $request->pentesting_start_date;
+        if (strpos($startDate, "T") !== false) {
+            $startDateFinal = str_replace("T", " ", $startDate);
+        } else {
+            $startDateFinal = $startDate;
+        }
+
+        $endDate = $request->pentesting_end_date;
+        if (strpos($endDate, "T") !== false) {
+            $endDateFinal = str_replace("T", " ", $endDate);
+        } else {
+            $endDateFinal = $endDate;
+        }
+
+        $name = $request->name ? $request->name : "";
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . session('token'),
         ])
             ->put(env('APP_API_URL') . '/api/program/' . $id, [
-                'name' => $request->name,
-                'pentesting_start_date' => $request->pentesting_start_date,
-                'pentesting_end_date' => $request->pentesting_end_date,
+                'name' => $name,
+                'pentesting_start_date' => $startDateFinal,
+                'pentesting_end_date' => $endDateFinal,
             ]);
 
-        dd($response->json());
-        // if ($response->successful()) {
-        //     return redirect()->route('program.show.by-user', ['program_id' => $id]);
-        // } else {
-        //     $errors = $response->json()['error'];
-        //     return back()->withErrors($errors);
-        // }
+        if ($response->successful()) {
+            return redirect()->route('program.show.by-user', ['program_id' => $id]);
+        }
 
+    }
+
+    public function destroy($id)
+    {
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . session('token'),
+        ])->delete(env('APP_API_URL') . '/api/program/' . $id);
+
+        return redirect()->route('program.show.all');
     }
 }
