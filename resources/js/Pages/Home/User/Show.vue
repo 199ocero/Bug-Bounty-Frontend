@@ -56,6 +56,10 @@
           <p>Severity:</p>
           <p class="text-red-300">{{ report.severity }}</p>
         </div>
+        <div class="flex justify-between">
+          <p>Created by:</p>
+          <p class="text-orange-300">{{ report.user.name }}</p>
+        </div>
       </Box>
     </div>
   </div>
