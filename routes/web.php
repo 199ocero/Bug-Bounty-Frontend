@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -25,6 +26,11 @@ Route::group(['middleware' => ['auth_guard']], function () {
     Route::get('program/user/all', [HomeController::class, 'showAllByUser'])->name('program.show.all');
     Route::get('program/{program_id}/user', [HomeController::class, 'showByUser'])->name('program.show.by-user');
     Route::get('program/{program_id}/edit/user', [HomeController::class, 'showByUserEdit']);
+
+    Route::get('report', [ReportController::class, 'index'])->name('report.index');
+    Route::get('report/{id}', [ReportController::class, 'create'])->name('report.create');
+    Route::post('report', [ReportController::class, 'store'])->name('report.store');
+    Route::delete('report/{id}', [ReportController::class, 'destroy'])->name('report.destroy');
 
     Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 });

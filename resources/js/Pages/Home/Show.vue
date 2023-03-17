@@ -25,7 +25,10 @@
     </div>
   </Box>
   <div class="my-5">
-    <Link :href="route('program.show.all')" class="font-medium btn-primary"
+    <Link
+      :href="route('report.create', { id: program.id })"
+      class="font-medium btn-primary"
+      :program_id="program.id"
       >Submit a report</Link
     >
   </div>

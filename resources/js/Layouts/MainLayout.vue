@@ -2,20 +2,24 @@
   <header class="w-full bg-gray-800 border-b border-gray-700">
     <div class="container mx-auto">
       <nav class="flex items-center justify-between p-4">
-        <div class="text-base font-medium text-white">Programs</div>
+        <div class="text-white">
+          {{ user.data.name }}
+        </div>
         <div class="text-lg font-bold text-blue-400">
           <Link :href="route('program.index')">Bug Bounty</Link>
         </div>
         <div v-if="user" class="flex items-center gap-4 text-base">
-          <div class="text-white">
-            {{ user.data.name }}
-          </div>
+          <Link :href="route('report.index')" class="font-medium btn-primary-sm"
+            >My Reports</Link
+          >
           <Link
             :href="route('program.show.all')"
-            class="font-medium btn-primary"
+            class="font-medium btn-primary-sm"
             >My Programs</Link
           >
-          <Link :href="route('program.create')" class="font-medium btn-primary"
+          <Link
+            :href="route('program.create')"
+            class="font-medium btn-primary-sm"
             >+ New Program</Link
           >
           <span class="text-gray-600">|</span>
