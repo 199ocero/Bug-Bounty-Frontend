@@ -18,6 +18,33 @@ class HomeController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return inertia('Home/User/Create');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'pentesting_start_date' => 'required|date',
+            'pentesting_end_date' => 'required|date',
+        ]);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . session('token'),
+        ])->post(env('APP_API_URL') . '/api/program', [
+                'name' => $request->name,
+                'pentesting_start_date' => $request->pentesting_start_date,
+                'pentesting_end_date' => $request->pentesting_end_date,
+            ]);
+
+        if ($response->successful()) {
+            return redirect()->route('program.show.all');
+        } else {
+            $errors = $response->json()['error'];
+            return back()->withErrors($errors);
+        }
+    }
     public function show($id)
     {
         $response = Http::withHeaders([
@@ -102,10 +129,11 @@ class HomeController extends Controller
 
     public function destroy($id)
     {
-        $response = Http::withHeaders([
+        Http::withHeaders([
             'Authorization' => 'Bearer ' . session('token'),
         ])->delete(env('APP_API_URL') . '/api/program/' . $id);
 
         return redirect()->route('program.show.all');
     }
+
 }

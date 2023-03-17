@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full border-b border-gray-700 bg-gray-800">
+  <header class="w-full bg-gray-800 border-b border-gray-700">
     <div class="container mx-auto">
       <nav class="flex items-center justify-between p-4">
         <div class="text-base font-medium text-white">Programs</div>
@@ -15,7 +15,9 @@
             class="font-medium btn-primary"
             >My Programs</Link
           >
-          <Link href="#" class="font-medium btn-primary">+ New Program</Link>
+          <Link :href="route('program.create')" class="font-medium btn-primary"
+            >+ New Program</Link
+          >
           <span class="text-gray-600">|</span>
           <div class="font-medium text-red-400">
             <Link :href="route('logout')" method="DELETE" as="button"

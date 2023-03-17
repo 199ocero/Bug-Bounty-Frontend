@@ -18,6 +18,8 @@ use App\Http\Controllers\HomeController;
 Route::group(['middleware' => ['auth_guard']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('program.index');
     Route::get('program/{id}', [HomeController::class, 'show'])->name('program.show');
+    Route::get('program', [HomeController::class, 'create'])->name('program.create');
+    Route::post('program', [HomeController::class, 'store'])->name('program.store');
     Route::put('program/{id}', [HomeController::class, 'update'])->name('program.update');
     Route::delete('program/{id}', [HomeController::class, 'destroy'])->name('program.delete');
     Route::get('program/user/all', [HomeController::class, 'showAllByUser'])->name('program.show.all');
