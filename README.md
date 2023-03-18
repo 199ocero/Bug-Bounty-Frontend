@@ -32,7 +32,13 @@ To install the Bug-Bounty project, please follow the steps below:
    ```
 
 5. Update the APP_API_URL value in the `.env` file to point to the URL of the Bug-Bounty back-end API. If you run the API using `php artisan serve` no need to change the APP_API_URL.
-6. Finally, start the application by running:
+6. To generate an encryption key, run the following command:
+
+   ```
+   php artisan key:generate
+   ```
+
+7. Finally, start the application by running:
 
    ```
    php artisan serve --port=4011
