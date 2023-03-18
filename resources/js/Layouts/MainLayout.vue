@@ -33,12 +33,12 @@
     </div>
   </header>
   <main class="container p-4 mx-auto">
-    <!-- <div
+    <div
       v-if="flashSuccess"
       class="p-3 mb-2 text-green-700 bg-green-200 rounded-md"
     >
       {{ flashSuccess }}
-    </div> -->
+    </div>
     <slot></slot>
   </main>
 </template>
@@ -47,6 +47,6 @@
 import { Link, usePage } from "@inertiajs/vue3";
 import { computed } from "vue";
 
-// const flashSuccess = computed(() => usePage().props.flash.success);
+const flashSuccess = computed(() => usePage().props.flash.success);
 const user = computed(() => usePage().props.user);
 </script>

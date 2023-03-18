@@ -45,7 +45,8 @@ class ReportController extends Controller
             ]);
 
         if ($response->successful()) {
-            return redirect()->route('program.show', ['id' => $request->program_id]);
+            return redirect()->route('program.show', ['id' => $request->program_id])
+                ->with('success', 'Report created successfully.');
         } else {
             $errors = $response->json()['error'];
             return back()->withErrors($errors);
@@ -85,7 +86,9 @@ class ReportController extends Controller
             ]);
 
         if ($response->successful()) {
-            return redirect()->route('report.index');
+            return redirect()->route('report.index')
+                ->with('success', 'Report updated successfully.');
+            ;
         } else {
             $errors = $response->json()['error'];
             return back()->withErrors($errors);
@@ -98,6 +101,8 @@ class ReportController extends Controller
             'Authorization' => 'Bearer ' . session('token'),
         ])->delete(env('APP_API_URL') . '/api/report/' . $id);
 
-        return redirect()->route('report.index');
+        return redirect()->route('report.index')
+            ->with('success', 'Report created successfully.');
+        ;
     }
 }

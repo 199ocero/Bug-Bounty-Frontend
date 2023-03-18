@@ -39,7 +39,8 @@ class HomeController extends Controller
             ]);
 
         if ($response->successful()) {
-            return redirect()->route('program.show.all');
+            return redirect()->route('program.show.all')
+                ->with('success', 'Program created successfully.');
         } else {
             $errors = $response->json()['error'];
             return back()->withErrors($errors);
@@ -122,7 +123,8 @@ class HomeController extends Controller
             ]);
 
         if ($response->successful()) {
-            return redirect()->route('program.show.by-user', ['program_id' => $id]);
+            return redirect()->route('program.show.by-user', ['program_id' => $id])
+                ->with('success', 'Program updated successfully.');
         }
 
     }
@@ -133,7 +135,9 @@ class HomeController extends Controller
             'Authorization' => 'Bearer ' . session('token'),
         ])->delete(env('APP_API_URL') . '/api/program/' . $id);
 
-        return redirect()->route('program.show.all');
+        return redirect()->route('program.show.all')
+            ->with('success', 'Program deleted successfully.');
+        ;
     }
 
 }
