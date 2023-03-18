@@ -102,7 +102,7 @@ class ReportController extends Controller
         ])->delete(env('APP_API_URL') . '/api/report/' . $id);
 
         return redirect()->route('report.index')
-            ->with('success', 'Report created successfully.');
+            ->with('success', 'Report deleted successfully.');
         ;
     }
 }
