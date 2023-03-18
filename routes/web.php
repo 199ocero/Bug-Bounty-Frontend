@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth_guard']], function () {
     Route::get('report/{id}', [ReportController::class, 'create'])->name('report.create');
     Route::post('report', [ReportController::class, 'store'])->name('report.store');
     Route::delete('report/{id}', [ReportController::class, 'destroy'])->name('report.destroy');
+    Route::get('report/{report_id}/edit/user', [ReportController::class, 'showByUserEdit'])->name('report.edit');
+    Route::put('report/{id}', [ReportController::class, 'update'])->name('report.update');
 
     Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 });

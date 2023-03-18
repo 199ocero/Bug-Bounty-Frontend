@@ -52,9 +52,15 @@ class ReportController extends Controller
         }
     }
 
-    public function show($id)
+    public function showByUserEdit($id)
     {
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . session('token'),
+        ])->get(env('APP_API_URL') . '/api/report/' . $id . '/user');
 
+        return inertia('Report/Edit', [
+            'report' => collect($response->json()['data'])
+        ]);
     }
 
     public function edit($id)
@@ -64,7 +70,26 @@ class ReportController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'severity' => 'required',
+            'status' => 'required',
+        ]);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . session('token'),
+        ])->put(env('APP_API_URL') . '/api/report/' . $id, [
+                'title' => $request->title,
+                'severity' => $request->severity,
+                'status' => $request->status,
+            ]);
+
+        if ($response->successful()) {
+            return redirect()->route('report.index');
+        } else {
+            $errors = $response->json()['error'];
+            return back()->withErrors($errors);
+        }
     }
 
     public function destroy($id)

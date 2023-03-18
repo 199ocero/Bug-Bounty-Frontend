@@ -3,7 +3,11 @@
     <template #header> Report Information </template>
     <template #header-crud>
       <div class="flex gap-3">
-        <Link href="#" class="text-sm btn-primary-sm">Edit</Link>
+        <Link
+          :href="route('report.edit', { report_id: report.id })"
+          class="text-sm btn-primary-sm"
+          >Edit</Link
+        >
         <Link
           :href="route('report.destroy', { id: report.id })"
           method="DELETE"
