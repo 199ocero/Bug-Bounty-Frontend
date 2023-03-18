@@ -31,7 +31,7 @@ To install the Bug-Bounty project, please follow the steps below:
    cp .env.example .env
    ```
 
-5. Update the API_API_URL value in the `.env` file to point to the URL of the Bug-Bounty back-end API. If you run the code using `php artisan serve` no need to change the APP_API_URL.
+5. Update the APP_API_URL value in the `.env` file to point to the URL of the Bug-Bounty back-end API. If you run the API using `php artisan serve` no need to change the APP_API_URL.
 6. Finally, start the application by running:
 
    ```
